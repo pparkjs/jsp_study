@@ -10,6 +10,7 @@
 </head>
 <body>
 	<%@ include file="menu.jsp" %>
+	
 	<div class="jumbotron">
 		<div class="container">
 			<h1 class="display-3">상품 목록</h1>
