@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	 PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="board">
+	<sql id="dynamicCondition">
+		<where>
+			<if test="!(stype == '' or sword == '')"> <!-- 부정 넣으면 and가 됨 -->
+				${stype} like '%'||#{sword}||'%'
+			</if>
+		</where>
+	</sql>
+
+	<!-- 전체글갯수 구하기 -->
+	<select id="totalCount" resultType="int" parameterType="map">
+		select count(*) from board
+			<include refid="dynamicCondition"/> <!-- 해당 조건 만족해야 실행함 -->
+	</select>
+	
+	<!-- 게시판 목록 가져오기 -->
+	<select id="boardList" parameterType="map" resultType="boardVO">
+		select A.*
+			from(select rownum num, B.* 
+			   from(select * 
+			          from board 
+			          <include refid="dynamicCondition"/>
+			          order by bo_no desc
+			         ) B
+			    <![CDATA[   
+			    where rownum <= #{end})A
+			where A.num >= #{start}
+			  ]]>
+	</select>
+	
+	<!-- 게시글 상세보기 -->
+	<select id="boardView" resultType="boardVO" parameterType="String">
+		select * from board where bo_no = #{bo_no}
+	</select>
+	
+	<!-- 게시글 등록하기 -->
+	<insert id="boardInsert" parameterType="boardVO">
+		insert into board values(seq_board.nextval, #{bo_title}, #{bo_content}, #{bo_writer}, sysdate, 0)
+	</insert>
+	
+	<!-- 게시글 수정 -->
+	<update id="boardUpdate" parameterType="boardVO">
+		update board set bo_title = #{bo_title},
+						 bo_content = #{bo_content} 	
+					where bo_no = #{bo_no}
+	</update>
+	
+	<!-- 게시글 삭제하기 -->
+	<delete id="boardDelete" parameterType="String">
+		 delete from board where bo_no = #{bo_no}
+	</delete>
+	
+	<!-- 조회수 증가 -->
+	<update id="boardHit" parameterType="String">
+		update board set bo_hit = bo_hit + 1 where bo_no = #{bo_no}
+	</update>
+
+
+</mapper>

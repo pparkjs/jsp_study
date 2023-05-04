@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	 PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="member">
+
+	<!--회원가입 하는 쿼리 -->
+	<insert id="memberJoin" parameterType="memberVO">
+		insert into member values(seq_member.nextval, #{mem_id}, #{mem_pw}, #{mem_name}, sysdate)
+	</insert>
+	
+	<!--로그인하는 쿼리 -->
+	<select id="memberLogin" parameterType="memberVO" resultType="memberVO">
+		select * from member where mem_id = #{mem_id} and mem_pw = #{mem_pw}
+	</select>
+</mapper>
