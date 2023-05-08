@@ -53,43 +53,109 @@
   <!-- ch10 폼 인증 처리 방법으로 보안 처리하기 End  -->
   
   <!-- ch10 프로그래밍적 시큐리티 보안 처리하기 -->
+<!--   <security-role> -->
+<!--   	<role-name>role1</role-name> -->
+<!--   </security-role> -->
+<!--   <security-constraint> -->
+<!-- 	<web-resource-collection> -->
+<!-- 		<web-resource-name>JSPBook</web-resource-name> -->
+<!-- 		<url-pattern>/ch10/security02.jsp</url-pattern> -->
+<!-- 		<http-method>GET</http-method> -->
+<!-- 	</web-resource-collection>   -->
+<!-- 	<auth-constraint> -->
+<!-- 		<description>프로그래밍적 시큐리티 보안 처리하기</description> -->
+<!-- 		<role-name>role1</role-name> -->
+<!-- 	</auth-constraint> -->
+<!--   </security-constraint> -->
+<!--   <login-config> -->
+<!--   	<auth-method>FORM</auth-method> -->
+<!--   	<form-login-config> -->
+<!--   		<form-login-page>/ch10/login.jsp</form-login-page> -->
+<!--   		<form-error-page>/ch10/login_failed.jsp</form-error-page> -->
+<!--   	</form-login-config> -->
+<!--   </login-config> -->
+  <!-- ch10 프로그래밍적 시큐리티 보안 처리하기  End-->
+  
+  <!-- ch11 예외 처리 -->
+  <error-page>
+  	<error-code>500</error-code>
+  	<location>/ch11/errorCode_error.jsp</location>
+  </error-page>
+  
+  <error-page>
+  	<exception-type>java.lang.Exception</exception-type>
+  	<location>/ch11/exceptionType_error.jsp</location>
+  </error-page>
+  
+  
+  
+  <!-- ch11단원 test문제 -->
   <security-role>
-  	<role-name>role1</role-name>
+  	<role-name>admin</role-name>
   </security-role>
   <security-constraint>
-	<web-resource-collection>
-		<web-resource-name>JSPBook</web-resource-name>
-		<url-pattern>/ch10/security02.jsp</url-pattern>
-		<http-method>GET</http-method>
-	</web-resource-collection>  
-	<auth-constraint>
-		<description>프로그래밍적 시큐리티 보안 처리하기</description>
-		<role-name>role1</role-name>
-	</auth-constraint>
+  	<web-resource-collection>
+  		<web-resource-name>JSPBook</web-resource-name>
+  		<url-pattern>/ch11/test/boardForm.jsp</url-pattern>
+  		<http-method>GET</http-method>
+  	</web-resource-collection>
+  	<auth-constraint>
+  		<description>게시글 등록 시큐리티 보안 처리하기</description>
+  		<role-name>admin</role-name>
+  	</auth-constraint>
   </security-constraint>
   <login-config>
   	<auth-method>FORM</auth-method>
   	<form-login-config>
-  		<form-login-page>/ch10/login.jsp</form-login-page>
-  		<form-error-page>/ch10/login_failed.jsp</form-error-page>
+  		<form-login-page>/ch11/test/loginSecurity.jsp</form-login-page>
+  		<form-error-page>/ch11/test/loginFailed.jsp</form-error-page>
   	</form-login-config>
   </login-config>
-  <!-- ch10 프로그래밍적 시큐리티 보안 처리하기  End-->
   
+  <!-- 12장 필터 1 -->
+  <filter>
+   <filter-name>Filter01</filter-name>
+   <filter-class>ch12.AuthenFilter</filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name>Filter01</filter-name>
+  	<url-pattern>/ch12/filter01_process.jsp</url-pattern>
+  </filter-mapping>
+  <!-- 12장 필터 1 End -->
   
+  <!-- 12장 필터 2 -->
+  <filter>
+  	<filter-name>Filter02</filter-name>
+  	<filter-class>ch12.InitParamFilter</filter-class>
+  	<init-param>
+  		<param-name>param1</param-name>
+  		<param-value>admin</param-value>
+  	</init-param>
+  	<init-param>
+  		<param-name>param2</param-name>
+  		<param-value>1234</param-value>
+  	</init-param>
+  </filter>
+  <filter-mapping>
+  	<filter-name>Filter02</filter-name>
+  	<url-pattern>/ch12/filter02_process.jsp</url-pattern>
+  </filter-mapping>
+    <!-- 12장 필터 2 End -->
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+  <!-- 12장 필터3 -->
+  <filter>
+  	<filter-name>Filter02_2</filter-name>
+  	<filter-class>ch12.LogFileFilter</filter-class>
+  	<init-param>
+  		<param-name>filename</param-name>
+  		<param-value>C:\\logs\monitor.log</param-value>
+  	</init-param>
+  </filter>
+  <filter-mapping>
+  	<filter-name>Filter02_2</filter-name>
+  	<url-pattern>/ch12/filter02_process.jsp</url-pattern>
+  </filter-mapping>
+  <!-- 12장 필터 3 End -->
   
   
   
