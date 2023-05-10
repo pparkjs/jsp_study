@@ -28,7 +28,7 @@
 		%>
 			<div class="col-md-4">
 				<img src="${pageContext.request.contextPath }/resources/images/<%=product.getFilename() %>" style="width:100%"/>
-				<h3><%=product.getPname() %></h3>
+				<h3><%=product.getPname() %></h3>http://localhost/WebMarket/cart.jsp
 				<p><%=product.getDescription() %></p>
 				<p><%=product.getUnitPrice()%>원</p>
 				<p><a href="./product.jsp?id=<%=product.getProductId()%>"class="btn btn-secondary" role="button">상세 정보 &raquo;></a>
