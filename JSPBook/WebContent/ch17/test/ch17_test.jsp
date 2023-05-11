@@ -55,16 +55,7 @@
                                 		1. JSTL을 이용하여 작성해주세요
                                 	 -->
                                
-                              	<% 
-                              		String name = "박정수,조성희,정은지,고영우,구기현,김동혁,김민욱,김민정,김지완,박승우,박윤수,배문기,변정민,신국현,신현근,오대환,오미나,유이현,이성일,이수진,이지영,전다미,전지혜,정재균,진현성,홍기태,황지현";
-                              		HashMap<String, Integer> map = new HashMap<>();
-                              	%>
-                              	
-                              	<c:set value="<%=name %>" var="name"/> 
-                                <c:set value="${fn:split(name, ',')}" var="names"/>
-                                <c:set value="<%=map %>" var="map"/>
-                                
-<%--                                 <c:forEach var="i" begin="0" end="${fn:length(names) - 1}" > --%>
+                              <%-- <c:forEach var="i" begin="0" end="${fn:length(names) - 1}" > --%>
 <%--                                 <c:set value="0" var="cnt"/> --%>
 <%--                                 	<c:forEach var="j" begin="0" end="${fn:length(names) - 1}"> --%>
 <%--                                 		<c:if test="${fn:substring(names[i],0,1) == fn:substring(names[j],0,1)}"> --%>
@@ -75,11 +66,20 @@
 <%--                                 	<c:forEach var="j" begin="0" end="${fn:length(names) - 1}"> --%>
 <%--                                 		<c:if test="${fn:substring(names[i],0,1) == fn:substring(names[j],0,1)}"> --%>
 <%--                                 			<c:set target="${map}" property="${fn:substring(names[i],0,1)}" value="${cnt}"/> --%>
-<%--                                 		</c:if> --%>wads
+<%--                                 		</c:if> --%>
 <%--                                 	</c:forEach> --%>
 <%--                                 </c:forEach> --%>
                                 
-                                 <c:forEach var="i" begin="0" end="${fn:length(names) - 1}" >
+                              	<% 
+                              		String name = "박정수,조성희,정은지,고영우,구기현,김동혁,김민욱,김민정,김지완,박승우,박윤수,배문기,변정민,신국현,신현근,오대환,오미나,유이현,이성일,이수진,이지영,전다미,전지혜,정재균,진현성,홍기태,황지현";
+                              		HashMap<String, Integer> map = new HashMap<>();
+                              	%>
+                              	
+                              	<c:set value="<%=name %>" var="name"/> 
+                                <c:set value="${fn:split(name, ',')}" var="names"/>
+                                <c:set value="<%=map %>" var="map"/>
+                                
+                                <c:forEach var="i" begin="0" end="${fn:length(names) - 1}" >
                                 	<c:set target="${map}" property="${fn:substring(names[i],0,1)}" value="${map.get(fn:substring(names[i],0,1)) + 1}"/>
                                 </c:forEach>
                                 
